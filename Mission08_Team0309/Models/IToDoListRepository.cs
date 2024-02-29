@@ -8,6 +8,12 @@ namespace Mission08_Team0309
     
     List<Item> Items {get;}
 
-    // public void AddItem(Item item);
+    public void AddItem(Item item);
+
+    public IQueryable<Item> UncompletedItems();
+
+    public void UpdateItem(Item item);
+
+    public void DeleteItem(Item item);
   }
 }

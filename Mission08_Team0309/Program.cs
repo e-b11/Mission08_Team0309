@@ -11,6 +11,9 @@ builder.Services.AddControllersWithViews();
 
 // builder.Services.AddDbContext<ToDoListContext>(options =>
 //     options.UseSqlite("ConnectionStrings:ToDoConnection"));
+
+// For some reason the above code wasn't working ^ 
+// So ChatGPT gave me this and it worked:
 builder.Services.AddDbContext<ToDoListContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("ToDoConnection");
