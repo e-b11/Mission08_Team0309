@@ -1,14 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using Mission08_Team0309;
 using Mission08_Team0309.Models;
+using Microsoft.Extensions.Configuration;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// builder.Services.AddDbContext<ToDoListContext>(options =>
+//     options.UseSqlite("ConnectionStrings:ToDoConnection"));
 builder.Services.AddDbContext<ToDoListContext>(options =>
-    options.UseSqlite("ConnectionStrings:ToDoConnection"));
+{
+    var connectionString = builder.Configuration.GetConnectionString("ToDoConnection");
+    options.UseSqlite(connectionString);
+});
+
 
 builder.Services.AddScoped<IToDoListRepository, EFToDoListRepository>();
 
