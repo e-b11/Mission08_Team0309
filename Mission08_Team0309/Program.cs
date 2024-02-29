@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Mission08_Team0309.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ToDoListContext>(options =>
+    options.UseSqlite("ConnectionStrings:ToDoConnection"));
 
 var app = builder.Build();
 
