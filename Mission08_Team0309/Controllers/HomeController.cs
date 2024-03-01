@@ -28,7 +28,7 @@ namespace Mission08_Team0309.Controllers
             ViewBag.Category = _context.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
-            return View("Tasks", new Item());
+            return View("Tasks");
         }
 
         [HttpPost]

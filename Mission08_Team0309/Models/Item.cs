@@ -8,8 +8,12 @@ namespace Mission08_Team0309
   {
     [Key]
     public required int Id {get; set;}
+
+    [Required(ErrorMessage = "Please Enter a Task")]
     public required string Task {get; set;}
     public DateTime? DueDate {get; set;}
+
+    [Required(ErrorMessage = "Please Enter a Quadrant")]
     public required int Quadrant {get; set;}
     [ForeignKey("CategoryId")]
     public Category? Category {get; set;}

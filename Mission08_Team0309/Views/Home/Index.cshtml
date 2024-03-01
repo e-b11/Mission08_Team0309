@@ -2,4 +2,31 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Home</h1>
+<h1 class="centered-header">Put First Things First</h1>
+
+<div class="Container">
+    <div class="row">
+        <div class="col">
+            <img src="~/adobestock_76029922-1080x675.jpeg" width="300" height="200" />
+        </div>
+        <div class="col">
+            <img src="~/family_portrait.jpg" width="300" height="200" />
+        </div>
+    </div>
+    <div class="row">
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col">
+            <img src="~/macbook-air-on-desk.jpg" width="300" height="200" />
+        </div>
+        <div class="col">
+            <img src="~/salt_lake_temple_lds.webp" width="300" height="200" />
+        </div>
+    </div>
+</div>
+
+<a asp-area="" asp-controller="Home" asp-action="Tasks">
+    Add a Task Today!
+</a>
