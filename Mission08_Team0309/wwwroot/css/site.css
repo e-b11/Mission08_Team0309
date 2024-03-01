@@ -20,3 +20,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.rotatetext {
+    transform: rotate(-90deg);
+}
+
+.height {
+    min-height: 550px;
+}
+
+.quadrants h1 {
+    text-align: center;
+    padding: 1rem;
+}

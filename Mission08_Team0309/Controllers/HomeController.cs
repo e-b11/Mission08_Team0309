@@ -11,5 +11,9 @@ namespace Mission08_Team0309.Controllers
             return View();
         }
 
+        public IActionResult Quadrants()
+        {
+            return View();
+        }
     }
 }
