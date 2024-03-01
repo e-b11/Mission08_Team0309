@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Mission08_Team0309.Models;
 using System.Diagnostics;
 
@@ -7,13 +9,11 @@ namespace Mission08_Team0309.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IToDoListRepository _itemRepository;
 
-
-        private ToDoListContext _context;
-
-        public HomeController(ToDoListContext temp)
+        public HomeController(IToDoListRepository itemRepository)
         {
-            _context = temp;
+            _itemRepository = itemRepository;
         }
 
         public IActionResult Index()
@@ -24,11 +24,9 @@ namespace Mission08_Team0309.Controllers
         [HttpGet]
         public IActionResult Tasks()
         {
-            
-            ViewBag.Category = _context.Categories
-                .OrderBy(x => x.CategoryName)
-                .ToList();
-            return View("Tasks", new Item());
+            ViewBag.Category = _itemRepository.Category.ToList();
+            //return View("Tasks");
+            return View();
         }
 
         [HttpPost]
@@ -36,54 +34,50 @@ namespace Mission08_Team0309.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Items.Add(response);
-                _context.SaveChanges();
+                _itemRepository.AddItem(response);
 
                 return View(response);
             }
 
             else
             {
-                ViewBag.Category = _context.Categories
+                ViewBag.Category = _itemRepository.Category
                 .OrderBy(x => x.CategoryName)
                 .ToList();
                 return View(response);
             }
-            
-            
-        }
-
-        public IActionResult Quadrant()
-        {
-            var quadrant = _context.Items
-                .OrderBy(x => x.Id).ToList();
-
-            return View(quadrant);
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Quadrants()
         {
-            var recordToEdit = _context.Items.FirstOrDefault(x => x.Id == id);
+            var submittedTasks = _itemRepository;
 
-            ViewBag.Categories = _context.Categories.OrderBy(x => x.CategoryName).ToList();
+            return View(submittedTasks);
+        }
+
+        [HttpGet]
+        public IActionResult Update(Item item)
+        {
+            var recordToEdit = _itemRepository.GetUpdateItem(Item item);
+
+            ViewBag.Categories = _itemRepository.Category.OrderBy(x => x.CategoryName).ToList();
 
             return View("Tasks", recordToEdit);
         }
 
         [HttpPost]
-        public IActionResult Edit(Item updatedInfo) 
-        { 
-            _context.Update(updatedInfo);
-            _context.SaveChanges();
+        public IActionResult Update(Item updatedInfo)
+        {
+            _itemRepository.UpdateItem(updatedInfo);
 
             return RedirectToAction("Quadrant");
         }
 
         [HttpGet]
-        public IActionResult Delete(int id) 
+        public IActionResult Delete(int id)
         {
-            var recordToDelete = _context.Items.FirstOrDefault(x => x.Id == id);
+            var recordToDelete = _itemRepository.GetUpdateItem(id);
 
             return View(recordToDelete);
         }
@@ -91,12 +85,9 @@ namespace Mission08_Team0309.Controllers
         [HttpPost]
         public IActionResult Delete(Item items)
         {
-            _context.Items.Remove(items);
-            _context.SaveChanges();
+            _itemRepository.DeleteItem(items);
 
             return RedirectToAction("Quadrant");
         }
-
-
     }
 }
