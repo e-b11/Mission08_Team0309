@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Mission08_Team0309.Models;
 using System.Diagnostics;
 
@@ -6,41 +7,86 @@ namespace Mission08_Team0309.Controllers
 {
     public class HomeController : Controller
     {
-        private IToDoListRepository repo;
 
-        public HomeController(IToDoListRepository temp)
+
+        private ToDoListContext _context;
+
+        public HomeController(ToDoListContext temp)
         {
-            repo = temp;
+            _context = temp;
         }
+
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult Task()
-        {   
-            ViewBag.Category = repo.Category
+        public IActionResult Tasks()
+        {
+            ViewBag.Category = _context.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
-            return base.View("Task", new Item();
+            return View("Tasks");
         }
 
         [HttpPost]
-        public IActionResult Task(Item i)
-        {   
-            if (ModelState.IsValid) 
-            {
-                repo.AddItem(i);
-            }
-            return View(i);
+        public IActionResult Tasks(Item response)
+        {
+            _context.Items.Add(response);
+            _context.SaveChanges();
+
+            return View(response);
         }
 
         public IActionResult Quadrant()
         {
-            var items = repo.Items.ToList();
+            var quadrant = _context.Items
+                .OrderBy(x => x.Id).ToList();
 
-            return View(items);
+            return View(quadrant);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Items
+                .Where(x => x.Id == id);
+
+            ViewBag.Categories = _context.Categories
+               .OrderBy(x => x.CategoryName)
+               .ToList();
+
+            return View("Tasks", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Item updatedInfo) 
+        { 
+            _context.Update(updatedInfo);
+            _context.SaveChanges();
+
+            return RedirectToAction("Quadrant");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id) 
+        {
+            var recordToDelete = _context.Items
+                .Single(x => x.Id == id);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Item items)
+        {
+            _context.Items.Remove(items);
+            _context.SaveChanges();
+
+            return RedirectToAction("Quadrant");
+        }
+
+
     }
 }
