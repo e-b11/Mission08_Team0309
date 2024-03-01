@@ -6,11 +6,11 @@ namespace Mission08_Team0309.Controllers
 {
     public class HomeController : Controller
     {
-        private ToDoListContext _context;
+        private IToDoListRepository repo;
 
-        public HomeController(ToDoListContext temp)
+        public HomeController(IToDoListRepository temp)
         {
-            _context = temp;
+            repo = temp;
         }
         public IActionResult Index()
         {
@@ -19,28 +19,28 @@ namespace Mission08_Team0309.Controllers
 
         [HttpGet]
         public IActionResult Task()
-        {
-            ViewBag.Category = _context.Category
+        {   
+            ViewBag.Category = repo.Category
                 .OrderBy(x => x.CategoryName)
                 .ToList();
-            return View("Task");
+            return base.View("Task", new Item();
         }
 
         [HttpPost]
-        public IActionResult Task(Item response)
-        {
-            _context.Item.Add(response);
-            _context.SaveChanges();
-
-            return View( response);
+        public IActionResult Task(Item i)
+        {   
+            if (ModelState.IsValid) 
+            {
+                repo.AddItem(i);
+            }
+            return View(i);
         }
 
         public IActionResult Quadrant()
         {
-            var item = _context.Item
-                .OrderBy(x => x.DueDate).ToList();
+            var items = repo.Items.ToList();
 
-            return View(item);
+            return View(items);
         }
     }
 }
