@@ -24,9 +24,9 @@ namespace Mission08_Team0309.Controllers
         [HttpGet]
         public IActionResult Tasks()
         {
-            ViewBag.Categories = _itemRepository.Categories.ToList();
+            ViewBag.Categories = _itemRepository.Categories.OrderBy(x => x.CategoryId).ToList();
             
-            return View();
+            return View("Tasks");
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace Mission08_Team0309.Controllers
         [HttpGet]
         public IActionResult Quadrants()
         {
-            var submittedTasks = _itemRepository;
+            var submittedTasks = _itemRepository.Items.ToList();
 
             return View(submittedTasks);
         }
