@@ -6,12 +6,15 @@
 
 @model Item
 
-<h2>Confirm Deletion</h2>
-<h3>@Model.Task, @Model.DueDate</h3>
+<div class="container">
+    <h2>Confirm Deletion</h2>
+    <h3>@Model.Task, @Model.DueDate</h3>
 
-<form method="POST">
-    <input type="hidden" asp-for="Id" />
+    <form method="POST">
+        <input type="hidden" asp-for="Id" />
 
-    <button class="btn btn-danger" type="submit">Delete</button>
-    <a class="btn btn-info" asp-controller="Home" asp-action="Quadrants">Cancel</a>
-</form>
+        <button class="btn btn-danger" type="submit">Delete</button>
+        <a class="btn btn-info" asp-controller="Home" asp-action="Quadrants">Cancel</a>
+    </form>
+</div>
+

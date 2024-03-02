@@ -34,7 +34,6 @@ namespace Mission08_Team0309.Controllers
         {
             if (ModelState.IsValid)
             {
-                //ViewBag.Categories = _itemRepository.Categories.ToList();
 
                 _itemRepository.AddItem(response);
 
@@ -76,9 +75,19 @@ namespace Mission08_Team0309.Controllers
         [HttpPost]
         public IActionResult Update(Item updatedInfo)
         {
-            _itemRepository.UpdateItem(updatedInfo);
+            if (ModelState.IsValid)
+            {
+                _itemRepository.UpdateItem(updatedInfo);
 
-            return RedirectToAction("Quadrants");
+                return RedirectToAction("Quadrants");
+            }
+            else
+            {
+                ViewBag.Categories = _itemRepository.Categories.ToList();
+
+                return View(updatedInfo);
+            }
+
         }
 
         [HttpGet]

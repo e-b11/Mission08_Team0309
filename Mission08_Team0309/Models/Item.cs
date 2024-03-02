@@ -15,6 +15,7 @@ namespace Mission08_Team0309
     public DateTime? DueDate {get; set;}
 
     [Required(ErrorMessage = "Please Enter a Quadrant")]
+    [Range(1, 4, ErrorMessage = "The value must be between 1 and 4.")]
     public int Quadrant {get; set;}
     [ForeignKey("CategoryId")]
     public int? CategoryId {get; set;}
