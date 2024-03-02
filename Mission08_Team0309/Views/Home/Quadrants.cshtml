@@ -29,22 +29,51 @@
         <div class="col-5">
             <h3>Quadrant I</h3>
             <table class="table">
-
+                <tr>
+                    <th>Name</th>
+                    <th>Due Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
             @foreach (var i in Model)
             {
                 if (i.Quadrant == 1)
-                {
+                {                   
                     <tr>
                         <td>@i.Task</td>
                         <td>@i.DueDate</td>
+                        <td><a class="btn btn-info" asp-controller="Home" asp-action="Update" asp-route-id="@i.Id">Edit</a></td>
+                        <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@i.Id">Delete</a></td>
                     </tr>
                 }
+                        
             }
             </table>
         </div>
         
         <div class="col-5">
             <h3>Quadrant II</h3>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Due Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach (var i in Model)
+                {
+                    if (i.Quadrant == 2)
+                    {
+                        <tr>
+                            <td>@i.Task</td>
+                            <td>@i.DueDate</td>
+                            <td><a class="btn btn-info" asp-controller="Home" asp-action="Update" asp-route-id="@i.Id">Edit</a></td>
+                            <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@i.Id">Delete</a></td>
+                        </tr>
+                    }
+                }
+            </table>
         </div>
     </div>
 
@@ -54,11 +83,53 @@
         </div>
         <div class="col-5">
             <h3>Quadrant III</h3>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Due Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach (var i in Model)
+                {
+                    if (i.Quadrant == 3)
+                    {
+                        <tr>
+                            <td>@i.Task</td>
+                            <td>@i.DueDate</td>
+                            <td><a class="btn btn-info" asp-controller="Home" asp-action="Update" asp-route-id="@i.Id">Edit</a></td>
+                            <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@i.Id">Delete</a></td>
+                        </tr>
+                    }
+                }
+            </table>
         </div>
 
         <div class="col">
             <div class="col-5"></div>
             <h3>Quadrant IV</h3>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Due Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach (var i in Model)
+                {
+                    if (i.Quadrant == 4)
+                    {
+                        <tr>
+                            <td>@i.Task</td>
+                            <td>@i.DueDate</td>
+                            <td><a class="btn btn-info" asp-controller="Home" asp-action="Update" asp-route-id="@i.Id">Edit</a></td>
+                            <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@i.Id">Delete</a></td>
+                        </tr>
+                    }
+                }
+            </table>
         </div>
     </div>
 

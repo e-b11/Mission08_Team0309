@@ -52,7 +52,11 @@ namespace Mission08_Team0309.Controllers
         [HttpGet]
         public IActionResult Quadrants()
         {
-            var submittedTasks = _itemRepository.Items.ToList();
+            //Only get tasks that have not been completed
+            var submittedTasks = _itemRepository.Items
+                .Where(x => x.Completed == false)
+                .OrderBy(x => x.DueDate)
+                .ToList();
 
             return View(submittedTasks);
         }
@@ -74,7 +78,7 @@ namespace Mission08_Team0309.Controllers
         {
             _itemRepository.UpdateItem(updatedInfo);
 
-            return RedirectToAction("Quadrant");
+            return RedirectToAction("Quadrants");
         }
 
         [HttpGet]
@@ -91,7 +95,7 @@ namespace Mission08_Team0309.Controllers
         {
             _itemRepository.DeleteItem(items);
 
-            return RedirectToAction("Quadrant");
+            return RedirectToAction("Quadrants");
         }
     }
 }
