@@ -9,7 +9,7 @@ namespace Mission08_Team0309.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IToDoListRepository _itemRepository;
+        private IToDoListRepository _itemRepository;
 
         public HomeController(IToDoListRepository itemRepository)
         {
@@ -24,8 +24,8 @@ namespace Mission08_Team0309.Controllers
         [HttpGet]
         public IActionResult Tasks()
         {
-            ViewBag.Category = _itemRepository.Category.ToList();
-            //return View("Tasks");
+            ViewBag.Categories = _itemRepository.Categories.ToList();
+            
             return View();
         }
 
@@ -41,7 +41,7 @@ namespace Mission08_Team0309.Controllers
 
             else
             {
-                ViewBag.Category = _itemRepository.Category
+                ViewBag.Category = _itemRepository.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
                 return View(response);
@@ -57,11 +57,13 @@ namespace Mission08_Team0309.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update(Item item)
+        public IActionResult Update(int id)
         {
-            var recordToEdit = _itemRepository.GetUpdateItem(Item item);
+            var recordToEdit = _itemRepository.Items
+                .Single(x => x.Id == id);
 
-            ViewBag.Categories = _itemRepository.Category.OrderBy(x => x.CategoryName).ToList();
+            ViewBag.Categories = _itemRepository.Categories.ToList()
+                .OrderBy(x => x.CategoryName).ToList();
 
             return View("Tasks", recordToEdit);
         }
@@ -77,7 +79,8 @@ namespace Mission08_Team0309.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var recordToDelete = _itemRepository.GetUpdateItem(id);
+            var recordToDelete = _itemRepository.Items
+                .Single(x => x.Id == id);
 
             return View(recordToDelete);
         }
