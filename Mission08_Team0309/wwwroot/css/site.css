@@ -18,18 +18,10 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: "Arial", sans-serif;
 }
 
-.rotatetext {
-    transform: rotate(-90deg);
-}
-
-.height {
-    min-height: 550px;
-}
-
-.quadrants h1 {
+.centered-header {
     text-align: center;
-    padding: 1rem;
 }

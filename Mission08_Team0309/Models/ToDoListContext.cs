@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Mission08_Team0309.Models
 {
   public class ToDoListContext : DbContext
@@ -8,8 +9,8 @@ namespace Mission08_Team0309.Models
     {
       
     }
-        public DbSet<Item> Items {get; set;}
-        public DbSet<Category> Categories {get; set;}
+    public DbSet<Item> Items {get; set;}
+    public DbSet<Category> Categories {get; set;}
     
   }
 }

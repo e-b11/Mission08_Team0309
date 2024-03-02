@@ -1,0 +1,60 @@
+﻿@using Mission08_Team0309.Models
+@{
+ 
+}
+
+@model Item
+
+<div class="container">
+    <form method ="post">
+    <input type="hidden" asp-for="Id"/>
+    <div class="row">
+        <div class="col">
+            <label asp-for="Task">What is the task?</label>
+            <br />
+            <input asp-for="Task" required/>
+        </div>
+        <div class="col">
+            <label asp-for="DueDate">When is the task due?</label>
+            <br />
+                <input asp-for="DueDate" type="date" min="2024-03-01" />
+            <br />
+        </div>
+        <div class="col">
+            <label asp-for="Quadrant">Which Quadrant (1-4)?</label>
+            <br />
+            <input asp-for="Quadrant" type="number" min="1" max="4" required/>
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label asp-for="CategoryId">Which Category?</label>
+            <br />
+            <select asp-for="CategoryId">
+                <option value="">Select a Category</option>
+                @foreach(Category c in ViewBag.Categories)
+                {
+                   <option value="@c.CategoryId">@c.CategoryName</option>
+                }
+            </select>
+            <br />
+        </div>
+        <div class="col">
+            <label asp-for="Completed">Completed?</label>
+            <br />
+            <select asp-for="Completed">
+                <option value=False>No</option>
+                <option value=True>Yes</option>
+            </select>
+            <br />
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+            <button type="submit">Submit Task</button>
+    </div>
+    <div asp-validation-summary="All"></div>
+
+    </form>
+</div>
