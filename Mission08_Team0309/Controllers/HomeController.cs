@@ -59,7 +59,7 @@ namespace Mission08_Team0309.Controllers
         [HttpGet]
         public IActionResult Update(Item item)
         {
-            var recordToEdit = _itemRepository.GetUpdateItem(Item item);
+            var recordToEdit = _itemRepository.GetUpdateItem(Item, item);
 
             ViewBag.Categories = _itemRepository.Category.OrderBy(x => x.CategoryName).ToList();
 
