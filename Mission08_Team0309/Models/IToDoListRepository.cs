@@ -7,7 +7,6 @@ namespace Mission08_Team0309
   {
     
     List<Item> Items {get;}
-
     List<Category> Categories { get;}
 
     public void AddItem(Item item);
