@@ -9,16 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// builder.Services.AddDbContext<ToDoListContext>(options =>
-//     options.UseSqlite("ConnectionStrings:ToDoConnection"));
+builder.Services.AddDbContext<ToDoListContext>(options =>
+{
+    options.UseSqlite(builder.Configuration["ConnectionStrings:ToDoConnection"]);
+});
+    
 
 // For some reason the above code wasn't working ^ 
 // So ChatGPT gave me this and it worked:
-builder.Services.AddDbContext<ToDoListContext>(options =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("ToDoConnection");
-    options.UseSqlite(connectionString);
-});
+//builder.Services.AddDbContext<ToDoListContext>(options =>
+//{
+//    var connectionString = builder.Configuration.GetConnectionString("ToDoConnection");
+//    options.UseSqlite(connectionString);
+//});
 
 
 builder.Services.AddScoped<IToDoListRepository, EFToDoListRepository>();

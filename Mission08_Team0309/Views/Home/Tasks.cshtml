@@ -1,6 +1,6 @@
 ﻿@using Mission08_Team0309.Models
 @{
-    ViewData["Title"] = "Tasks";
+ 
 }
 
 @model Item
@@ -29,11 +29,11 @@
     </div>
     <div class="row">
         <div class="col">
-            <label>Which Category?</label>
+            <label asp-for="CategoryId">Which Category?</label>
             <br />
-            <select>
-                <option value="">Category</option>
-                @foreach(Category c in ViewBag.Category)
+            <select asp-for="CategoryId">
+                <option value="">Select a Category</option>
+                @foreach(Category c in ViewBag.Categories)
                 {
                    <option value="@c.CategoryId">@c.CategoryName</option>
                 }

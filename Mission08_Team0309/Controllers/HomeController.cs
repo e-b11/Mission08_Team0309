@@ -26,7 +26,7 @@ namespace Mission08_Team0309.Controllers
         {
             ViewBag.Categories = _itemRepository.Categories.ToList();
             
-            return View();
+            return View(new Item());
         }
 
         [HttpPost]
