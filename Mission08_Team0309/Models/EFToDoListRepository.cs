@@ -13,6 +13,8 @@ namespace Mission08_Team0309
         // public IQueryable<Item> Items => _context.Items.ToList();
 
         List<Item> IToDoListRepository.Items => _context.Items.ToList();
+        List<Category> IToDoListRepository.Categories => _context.Categories.ToList();
+
 
         public void AddItem(Item item)
         {
