@@ -26,7 +26,7 @@ namespace Mission08_Team0309.Controllers
         {
             ViewBag.Categories = _itemRepository.Categories.ToList();
             
-            return View(new Item());
+            return View("Tasks", new Item());
         }
 
         [HttpPost]
@@ -34,16 +34,17 @@ namespace Mission08_Team0309.Controllers
         {
             if (ModelState.IsValid)
             {
+                //ViewBag.Categories = _itemRepository.Categories.ToList();
+
                 _itemRepository.AddItem(response);
 
-                return View(response);
+                return View("Confirmation", response);
             }
 
             else
             {
-                ViewBag.Category = _itemRepository.Categories
-                .OrderBy(x => x.CategoryName)
-                .ToList();
+                ViewBag.Categories = _itemRepository.Categories.ToList();
+                
                 return View(response);
             }
         }

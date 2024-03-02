@@ -4,7 +4,7 @@
 @{
 }
 
-@model Item
+@model List<Item>
 
 <div class="container-fluid">
     <div class="row">
@@ -28,6 +28,19 @@
         </div>
         <div class="col-5">
             <h3>Quadrant I</h3>
+            <table class="table">
+
+            @foreach (var i in Model)
+            {
+                if (i.Quadrant == 1)
+                {
+                    <tr>
+                        <td>@i.Task</td>
+                        <td>@i.DueDate</td>
+                    </tr>
+                }
+            }
+            </table>
         </div>
         
         <div class="col-5">
